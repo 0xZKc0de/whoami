@@ -1,70 +1,126 @@
 @import "tailwindcss";
 
+@theme {
+  --font-mono: var(--font-mono);
+  --font-habibi: var(--font-habibi);
+  --font-aref: var(--font-aref);
+  --font-cormorant: var(--font-cormorant);
+  --dark-mode: class;
+}
+
 :root {
   --background: 0 0% 100%;
-  --foreground: 0 0% 3.9%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 10% 3.9%;
+  --radius: 0.5rem;
+
+  --font-habibi: "Habibi", serif;
+  --font-aref: "Aref Ruqaa", serif;
 }
 
 .dark {
-  --background: 0 0% 0%;
+  --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
 }
 
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-habibi), serif;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* ── Custom scrollbar (global) ────────────────────────────── */
 ::-webkit-scrollbar {
   width: 8px;
 }
-::-webkit-scrollbar-track {
-  background: #000;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 
-/* ── Terminal-specific scrollbar ──────────────────────────── */
-.terminal-scrollbar::-webkit-scrollbar {
-  width: 5px;
-}
-.terminal-scrollbar::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: transparent;
 }
+
+::-webkit-scrollbar-thumb {
+  background: #a1a1aa;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #71717a;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* ── Terminal specific overrides ─────────────────────────── */
 .terminal-scrollbar::-webkit-scrollbar-thumb {
   background: rgba(16, 185, 129, 0.15);
-  border-radius: 10px;
 }
+
 .terminal-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(16, 185, 129, 0.3);
 }
 
-/* ── Blinking cursor animation ───────────────────────────── */
+/* ── Animation utils ─────────────────────────────────────── */
 @keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 .terminal-cursor {
   animation: cursor-blink 1s ease-in-out infinite;
-  color: rgba(16, 185, 129, 0.8);
-  font-weight: 300;
 }
 
-/* ── Line entry animation ────────────────────────────────── */
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(4px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

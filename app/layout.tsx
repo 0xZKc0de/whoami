@@ -35,24 +35,24 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+    children,
+}: Readonly<{
     children: React.ReactNode
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className={`${habibi.variable} ${arefRuqaa.variable} ${ibmPlexMono.variable} ${cormorantGaramond.variable} font-mono antialiased`}>
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-        >
-            <GrainOverlay />
-            <Navigation />
-            {children}
-        </ThemeProvider>
-        </body>
+            <body className={`${habibi.variable} ${arefRuqaa.variable} ${ibmPlexMono.variable} ${cormorantGaramond.variable} font-habibi antialiased`}>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="dark"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <GrainOverlay />
+                    <Navigation />
+                    {children}
+                </ThemeProvider>
+            </body>
         </html>
     )
 }

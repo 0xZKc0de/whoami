@@ -46,13 +46,6 @@ export function getPosts(): BlogPost[] {
 export function getPostBySlug(slug: string): BlogPost | null {
     try {
         const fullPath = path.join(postsDirectory, `${slug}.md`)
-        console.log(`[DEBUG] Attempting to read post: ${fullPath}`)
-
-        if (!fs.existsSync(fullPath)) {
-            console.error(`[DEBUG] File does not exist: ${fullPath}`)
-            return null
-        }
-
         const fileContents = fs.readFileSync(fullPath, "utf8")
         const { data, content } = matter(fileContents)
 
@@ -62,7 +55,6 @@ export function getPostBySlug(slug: string): BlogPost | null {
             ...(data as any),
         } as BlogPost
     } catch (error) {
-        console.error(`[DEBUG] Error reading post:`, error)
         return null
     }
 }
