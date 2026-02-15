@@ -23,7 +23,6 @@ const ibmPlexMono = IBM_Plex_Mono({
     variable: "--font-mono",
 })
 
-// Elegant serif font like in Kafka presentation
 const cormorantGaramond = Cormorant_Garamond({
     weight: ["300", "400", "500", "600", "700"],
     subsets: ["latin"],
@@ -31,8 +30,8 @@ const cormorantGaramond = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-    title: "Marouane Boufarouj - Software Engineer",
-    description: "Computer Science graduate, National School of Applied Sciences",
+    title: "Mohamed El Haddad - Software Engineer",
+    description: "Master's Student in Computer Engineering, Backend Developer & DevOps Enthusiast",
 }
 
 export default function RootLayout({
@@ -51,9 +50,7 @@ export default function RootLayout({
         >
             <GrainOverlay />
             <Navigation />
-            <div className="pt-24">
-                {children}
-            </div>
+            {children}
         </ThemeProvider>
         </body>
         </html>
