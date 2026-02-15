@@ -4,10 +4,12 @@ import Link from "next/link"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 
 export function Navigation() {
     const { theme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
+    const pathname = usePathname()
 
     useEffect(() => {
         setMounted(true)
@@ -18,7 +20,7 @@ export function Navigation() {
             <nav className="max-w-4xl mx-auto px-8 py-6 flex items-center justify-between">
                 <Link
                     href="/"
-                    className="text-xs font-cormorant hover:text-zinc-400 transition-colors font-medium"
+                    className="text-xs font-cormorant hover:text-zinc-400 transition-colors font-medium text-zinc-100"
                 >
                     Mohamed EL HADDAD
                 </Link>
@@ -26,19 +28,22 @@ export function Navigation() {
                 <div className="flex items-center gap-6">
                     <Link
                         href="/"
-                        className="text-xs font-mono hover:text-zinc-400 transition-colors font-light"
+                        className={`text-xs font-mono transition-colors font-light ${pathname === "/" ? "text-zinc-100" : "text-zinc-500 hover:text-zinc-400"
+                            }`}
                     >
                         About
                     </Link>
                     <Link
                         href="/work"
-                        className="text-xs font-mono text-zinc-500 hover:text-zinc-400 transition-colors font-light"
+                        className={`text-xs font-mono transition-colors font-light ${pathname === "/work" ? "text-zinc-100" : "text-zinc-500 hover:text-zinc-400"
+                            }`}
                     >
                         Work
                     </Link>
                     <Link
                         href="/blog"
-                        className="text-xs font-mono text-zinc-500 hover:text-zinc-400 transition-colors font-light"
+                        className={`text-xs font-mono transition-colors font-light ${pathname === "/blog" ? "text-zinc-100" : "text-zinc-500 hover:text-zinc-400"
+                            }`}
                     >
                         Blog
                     </Link>
