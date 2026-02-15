@@ -1,3 +1,6 @@
+import { profile } from "./data/profile"
+import { projects } from "./data/projects"
+
 export interface CommandOutput {
   text: string
   className?: string
@@ -6,83 +9,35 @@ export interface CommandOutput {
 export interface Command {
   name: string
   description: string
+  usage?: string
   execute: (args?: string[]) => CommandOutput[]
 }
 
 const commandRegistry = new Map<string, Command>()
 
-// ─── Register: whoami ────────────────────────────────────────────
+// ─── Register: whoami (MINIMAL / EXPERT STYLE) ──────────────────
 commandRegistry.set("whoami", {
   name: "whoami",
-  description: "Display information about Mohamed El Haddad",
+  description: "Display profile",
   execute: () => [
     { text: "", className: "" },
-    { text: "  ╭──────────────────────────────────────────────────────────╮", className: "text-zinc-700" },
-    { text: "  │                                                          │", className: "text-zinc-700" },
-    { text: "  │   Mohamed El Haddad                                      │", className: "text-zinc-100 text-base font-semibold" },
-    { text: "  │   Software Engineer & Backend Developer                  │", className: "text-emerald-400/80" },
-    { text: "  │                                                          │", className: "text-zinc-700" },
-    { text: "  ╰──────────────────────────────────────────────────────────╯", className: "text-zinc-700" },
+    // Minimal Banner - Just the Name
+    { text: "  MOHAMED EL HADDAD", className: "text-zinc-100 font-bold tracking-widest text-lg" },
+    { text: "  Software Engineer & Backend Developer", className: "text-zinc-500 text-xs uppercase tracking-wider mb-4" },
+
+    // Abstract / Intro
+    { text: "  Building scalable systems and solving complex algorithmic challenges.", className: "text-zinc-300 mb-2" },
+    { text: "  Master's student in Computer Engineering.", className: "text-zinc-400 mb-6" },
+
+    // Current Focus / Interests (The "What I do" section)
+    { text: "  CURRENT FOCUS", className: "text-emerald-500/80 text-xs font-bold tracking-widest mb-2" },
+    { text: "  •  Designing high-throughput backend architectures", className: "text-zinc-300" },
+    { text: "  •  Developing intelligent RAG systems with LLMs", className: "text-zinc-300" },
+    { text: "  •  Cloud-native DevOps & Infrastructure as Code", className: "text-zinc-300" },
+    { text: "  •  Graph databases & Knowledge representation", className: "text-zinc-300" },
+
     { text: "", className: "" },
-    //
-    // ── About ──
-    { text: "  ┌─ About ─────────────────────────────────────────────────", className: "text-cyan-500/70" },
-    { text: "  │", className: "text-zinc-700" },
-    { text: "  │  Master's student in Computer Engineering at Abdelmalek", className: "text-zinc-400" },
-    { text: "  │  Essaâdi University, Tetouan. Passionate about building", className: "text-zinc-400" },
-    { text: "  │  scalable systems and solving complex algorithmic", className: "text-zinc-400" },
-    { text: "  │  challenges.", className: "text-zinc-400" },
-    { text: "  │", className: "text-zinc-700" },
-    //
-    // ── Current Role ──
-    { text: "  ├─ Current Role ────────────────────────────────────────", className: "text-cyan-500/70" },
-    { text: "  │", className: "text-zinc-700" },
-    { text: "  │  ► AI Developer Intern @ LIADTECH (Remote)", className: "text-zinc-300" },
-    { text: "  │    Building intelligent RAG systems with FastAPI,", className: "text-zinc-500" },
-    { text: "  │    LangChain, and OpenAI embeddings.", className: "text-zinc-500" },
-    { text: "  │", className: "text-zinc-700" },
-    //
-    // ── Education ──
-    { text: "  ├─ Education ──────────────────────────────────────────", className: "text-cyan-500/70" },
-    { text: "  │", className: "text-zinc-700" },
-    { text: "  │  ► Master — Computer Engineering", className: "text-zinc-300" },
-    { text: "  │    Abdelmalek Essaâdi University", className: "text-zinc-500" },
-    { text: "  │  ► Bachelor — Mathematics & Computer Science", className: "text-zinc-300" },
-    { text: "  │    Graduated with Honors (Mention Bien)", className: "text-zinc-500" },
-    { text: "  │", className: "text-zinc-700" },
-    //
-    // ── Tech Stack ──
-    { text: "  ├─ Tech Stack ─────────────────────────────────────────", className: "text-cyan-500/70" },
-    { text: "  │", className: "text-zinc-700" },
-    { text: "  │  backend    Java · Spring Boot · FastAPI · Python", className: "text-emerald-400/60" },
-    { text: "  │  databases  PostgreSQL · MySQL · Oracle · Neo4j", className: "text-emerald-400/60" },
-    { text: "  │  devops     Docker · GitHub Actions · Azure · AWS", className: "text-emerald-400/60" },
-    { text: "  │  frontend   Angular · TypeScript", className: "text-emerald-400/60" },
-    { text: "  │  ai/ml      LangChain · OpenAI · RAG · Kafka", className: "text-emerald-400/60" },
-    { text: "  │", className: "text-zinc-700" },
-    //
-    // ── Certifications ──
-    { text: "  ├─ Certifications ─────────────────────────────────────", className: "text-cyan-500/70" },
-    { text: "  │", className: "text-zinc-700" },
-    { text: "  │  ✓ OCI 2025 Certified DevOps Professional", className: "text-yellow-500/70" },
-    { text: "  │  ✓ Neo4j Certified Professional", className: "text-yellow-500/70" },
-    { text: "  │  ✓ HackerRank Software Engineer", className: "text-yellow-500/70" },
-    { text: "  │", className: "text-zinc-700" },
-    //
-    // ── Achievements ──
-    { text: "  ├─ Achievements ───────────────────────────────────────", className: "text-cyan-500/70" },
-    { text: "  │", className: "text-zinc-700" },
-    { text: "  │  🏆 1st Place — Problem Solving Competition", className: "text-zinc-300" },
-    { text: "  │  🏆 1st Place — Secure Challenge 2025", className: "text-zinc-300" },
-    { text: "  │", className: "text-zinc-700" },
-    //
-    // ── Contact ──
-    { text: "  └─ Contact ────────────────────────────────────────────", className: "text-cyan-500/70" },
-    { text: "", className: "" },
-    { text: "     ✉  elhaddadmohamed963@gmail.com", className: "text-zinc-400" },
-    { text: "     ↗  github.com · linkedin.com · leetcode.com", className: "text-zinc-500" },
-    { text: "", className: "" },
-    { text: "  Type 'help' to see available commands.", className: "text-zinc-600 text-xs" },
+    { text: "  Usage: type 'help' to see available commands", className: "text-zinc-600 text-xs" },
     { text: "", className: "" },
   ],
 })
@@ -94,15 +49,144 @@ commandRegistry.set("help", {
   execute: () => {
     const lines: CommandOutput[] = [
       { text: "", className: "" },
-      { text: "  Available commands:", className: "text-zinc-300" },
-      { text: "  ─────────────────────────────────", className: "text-zinc-700" },
+      { text: "  Available Commands", className: "text-emerald-500/80 text-xs font-bold tracking-widest uppercase mb-3" },
     ]
 
     commandRegistry.forEach((cmd) => {
       lines.push({
-        text: `  ${cmd.name.padEnd(12)} ${cmd.description}`,
-        className: "text-zinc-400",
+        text: `  ${cmd.name.padEnd(12)}  ${cmd.description}`,
+        className: "text-zinc-300",
       })
+    })
+
+    lines.push({ text: "", className: "" })
+    lines.push({ text: "  Navigation: ↑↓ arrows for history • Tab for autocomplete", className: "text-zinc-600 text-xs" })
+    lines.push({ text: "", className: "" })
+    return lines
+  },
+})
+
+// ─── Register: skills ────────────────────────────────────────────
+commandRegistry.set("skills", {
+  name: "skills",
+  description: "Display technical skills with proficiency",
+  execute: () => {
+    const skills = [
+      {
+        category: "Languages", items: [
+          { name: "Java", level: 9 },
+          { name: "Python", level: 8 },
+          { name: "TypeScript", level: 7 },
+          { name: "SQL", level: 8 },
+        ]
+      },
+      {
+        category: "Backend", items: [
+          { name: "Spring Boot", level: 9 },
+          { name: "FastAPI", level: 8 },
+          { name: "Node.js", level: 6 },
+          { name: "REST APIs", level: 9 },
+        ]
+      },
+      {
+        category: "DevOps", items: [
+          { name: "Docker", level: 8 },
+          { name: "CI/CD", level: 8 },
+          { name: "AWS", level: 7 },
+          { name: "Azure", level: 7 },
+        ]
+      },
+      {
+        category: "AI / ML", items: [
+          { name: "LangChain", level: 8 },
+          { name: "OpenAI", level: 8 },
+          { name: "RAG Systems", level: 8 },
+          { name: "Kafka", level: 7 },
+        ]
+      },
+    ]
+
+    const lines: CommandOutput[] = [
+      { text: "", className: "" },
+      { text: "  Technical Proficiency", className: "text-emerald-500/80 text-xs font-bold tracking-widest uppercase mb-3" },
+    ]
+
+    skills.forEach((cat) => {
+      lines.push({ text: `  ${cat.category}`, className: "text-cyan-400/80 text-xs uppercase tracking-wider mb-2" })
+
+      cat.items.forEach((skill) => {
+        const filled = "█".repeat(skill.level)
+        const empty = "░".repeat(10 - skill.level)
+        const pct = `${skill.level * 10}%`
+        lines.push({
+          text: `  ${skill.name.padEnd(14)} ${filled}${empty}  ${pct}`,
+          className: skill.level >= 8 ? "text-emerald-300/80" : skill.level >= 6 ? "text-cyan-300/60" : "text-zinc-500",
+        })
+      })
+
+      lines.push({ text: "", className: "" })
+    })
+
+    return lines
+  },
+})
+
+// ─── Register: projects (card style) ─────────────────────────────
+commandRegistry.set("projects", {
+  name: "projects",
+  description: "List featured projects",
+  execute: () => {
+    const lines: CommandOutput[] = [
+      { text: "", className: "" },
+      { text: "  Featured Projects", className: "text-emerald-500/80 text-xs font-bold tracking-widest uppercase mb-3" },
+    ]
+
+    projects.forEach((project, index) => {
+      const num = String(index + 1).padStart(2, "0")
+
+      lines.push({
+        text: `  ${num}. ${project.title.toUpperCase()}`,
+        className: "text-zinc-100 font-bold tracking-wide"
+      })
+
+      lines.push({
+        text: `  ${project.description}`,
+        className: "text-zinc-400 mb-2"
+      })
+
+      if (project.techStack && project.techStack.length > 0) {
+        lines.push({
+          text: `  [ ${project.techStack.join(" / ")} ]`,
+          className: "text-emerald-500/60 text-xs"
+        })
+      }
+
+      if (project.link) {
+        lines.push({
+          text: `  ➜ ${project.link}`,
+          className: "text-blue-400/60 text-xs hover:text-blue-300 transition-colors cursor-pointer"
+        })
+      }
+
+      lines.push({ text: "", className: "" })
+    })
+
+    return lines
+  },
+})
+
+// ─── Register: social ────────────────────────────────────────────
+commandRegistry.set("social", {
+  name: "social",
+  description: "Display social links",
+  execute: () => {
+    const lines: CommandOutput[] = [
+      { text: "", className: "" },
+      { text: "  Connect", className: "text-emerald-500/80 text-xs font-bold tracking-widest uppercase mb-3" },
+    ]
+
+    profile.social.forEach((link) => {
+      lines.push({ text: `  ${link.platform.padEnd(12)} ${link.url}`, className: "text-zinc-300" })
     })
 
     lines.push({ text: "", className: "" })
@@ -113,7 +197,7 @@ commandRegistry.set("help", {
 // ─── Register: clear ─────────────────────────────────────────────
 commandRegistry.set("clear", {
   name: "clear",
-  description: "Clear the terminal",
+  description: "Clear terminal",
   execute: () => [],
 })
 
@@ -135,8 +219,9 @@ export function executeCommand(input: string): { output: CommandOutput[]; isClea
   if (!command) {
     return {
       output: [
+        { text: "", className: "" },
         { text: `  Command not found: ${commandName}`, className: "text-red-400/80" },
-        { text: "  Type 'help' to see available commands.", className: "text-zinc-600" },
+        { text: "  Type 'help' to see available commands.", className: "text-zinc-600 text-xs" },
         { text: "", className: "" },
       ],
       isClear: false,

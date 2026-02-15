@@ -25,19 +25,19 @@ export function Navigation() {
 
                 <div className="flex items-center gap-6">
                     <Link
-                        href="#about"
+                        href="/"
                         className="text-xs font-mono hover:text-zinc-400 transition-colors font-light"
                     >
                         About
                     </Link>
                     <Link
-                        href="#work"
+                        href="/work"
                         className="text-xs font-mono text-zinc-500 hover:text-zinc-400 transition-colors font-light"
                     >
                         Work
                     </Link>
                     <Link
-                        href="#blog"
+                        href="/blog"
                         className="text-xs font-mono text-zinc-500 hover:text-zinc-400 transition-colors font-light"
                     >
                         Blog

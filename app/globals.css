@@ -13,25 +13,64 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  /* Smooth font rendering */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* ── Custom scrollbar (global) ────────────────────────────── */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: #000;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #333;
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* ── Terminal-specific scrollbar ──────────────────────────── */
+.terminal-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.terminal-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.terminal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.15);
+  border-radius: 10px;
+}
+.terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.3);
+}
+
+/* ── Blinking cursor animation ───────────────────────────── */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-cursor {
+  animation: cursor-blink 1s ease-in-out infinite;
+  color: rgba(16, 185, 129, 0.8);
+  font-weight: 300;
+}
+
+/* ── Line entry animation ────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.terminal-line-enter {
+  animation: fadeInUp 0.15s ease-out forwards;
 }
