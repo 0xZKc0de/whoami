@@ -4,22 +4,22 @@ export function Footer() {
     const socialLinks = [
         {
             name: "GitHub",
-            href: "https://github.com/yourusername",
+            href: "https://github.com/0xZKc0de",
             icon: Github,
         },
         {
             name: "LinkedIn",
-            href: "https://linkedin.com/in/yourusername",
+            href: "https://linkedin.com/in/0xZKc0de",
             icon: Linkedin,
         },
         {
             name: "LeetCode",
-            href: "https://leetcode.com/yourusername",
+            href: "https://leetcode.com/u/UPkLskHSOz",
             icon: Code2,
         },
         {
             name: "Codeforces",
-            href: "https://codeforces.com/profile/yourusername",
+            href: "https://codeforces.com/profile/0xHADDAD",
             icon: Trophy,
         },
         {
@@ -36,7 +36,7 @@ export function Footer() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                         {/* Left side - Copyright */}
                         <div className="text-xs font-mono text-zinc-500 font-light">
-                            © 2025 Mohamed El Haddad. All rights reserved.
+                            © 2026 Mohamed El Haddad. All rights reserved.
                         </div>
 
                         {/* Right side - Social Links */}
