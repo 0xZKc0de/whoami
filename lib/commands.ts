@@ -28,18 +28,15 @@ commandRegistry.set("whoami", {
     { text: "", className: "" },
     // Minimal Banner - Just the Name
     { text: "  MOHAMED EL HADDAD", className: "text-zinc-100 font-bold tracking-widest text-lg" },
-    { text: "  Software Engineer & Backend Developer", className: "text-zinc-500 text-xs uppercase tracking-wider mb-4" },
+    { text: "  Software Engineer & System Architect", className: "text-zinc-500 text-xs uppercase tracking-wider mb-4" },
 
     // Abstract / Intro
-    { text: "  Building scalable systems and solving complex algorithmic challenges.", className: "text-zinc-300 mb-2" },
-    { text: "  Master's student in Computer Engineering.", className: "text-zinc-400 mb-6" },
-
-    // Current Focus / Interests (The "What I do" section)
-    { text: "  CURRENT FOCUS", className: "text-emerald-500/80 text-xs font-bold tracking-widest mb-2" },
-    { text: "  •  Designing high-throughput backend architectures", className: "text-zinc-300" },
-    { text: "  •  Developing intelligent RAG systems with LLMs", className: "text-zinc-300" },
-    { text: "  •  Cloud-native DevOps & Infrastructure as Code", className: "text-zinc-300" },
-    { text: "  •  Graph databases & Knowledge representation", className: "text-zinc-300" },
+    { text: "  Building software and solving problems—driven by logic and algorithms.", className: "text-zinc-300 mb-6" },
+    // Interests
+    { text: "  INTERESTS", className: "text-emerald-500/80 text-xs font-bold tracking-widest mb-2" },
+    { text: "  •  Software Engineering", className: "text-zinc-300" },
+    { text: "  •  Cryptography", className: "text-zinc-300" },
+    { text: "  •  Distributed Systems", className: "text-zinc-300" },
 
     { text: "", className: "" },
     { text: "  Usage: type 'help' to see available commands", className: "text-zinc-600 text-xs" },

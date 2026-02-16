@@ -9,7 +9,7 @@ image: "/images/projects/resume-builder.jpg"
 category: "Personal"
 ---
 
-Built a comprehensive resume builder that uses AI to optimize content for Applicant Tracking Systems (ATS).
+Built a specialized platform for engineering ATS-optimized resumes, utilizing AI to maximize candidate compatibility with automated screening systems.
 
 ### Key Features
 - **AI Content Generation**: Uses GPT-4 to suggest role-specific bullet points.
