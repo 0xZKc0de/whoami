@@ -1,7 +1,7 @@
 ---
 title: "Intelligent Resume RAG Assistant"
 description: "Specialized RAG system to accurately answer natural language questions about resumes."
-year: "2024"
+year: "2025"
 techStack: ["FastAPI", "LangChain", "OpenAI", "ChromaDB", "Docker", "Azure DevOps"]
 link: ""
 github: ""
