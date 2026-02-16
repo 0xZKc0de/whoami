@@ -28,7 +28,7 @@ commandRegistry.set("whoami", {
     { text: "", className: "" },
     // Minimal Banner - Just the Name
     { text: "  MOHAMED EL HADDAD", className: "text-zinc-100 font-bold tracking-widest text-lg" },
-    { text: "  Software Engineer & System Architect", className: "text-zinc-500 text-xs uppercase tracking-wider mb-4" },
+    { text: "  Software Engineer & Backend Developer", className: "text-zinc-500 text-xs uppercase tracking-wider mb-4" },
 
     // Abstract / Intro
     { text: "  Building software and solving problems—driven by logic and algorithms.", className: "text-zinc-300 mb-6" },
