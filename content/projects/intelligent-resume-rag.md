@@ -5,7 +5,7 @@ year: "2025"
 techStack: ["FastAPI", "LangChain", "OpenAI", "ChromaDB", "Docker", "Azure DevOps"]
 link: ""
 github: ""
-image: "/images/projects/rag-assistant.jpg"
+image: "/images/rag-assistant.png"
 category: "Internship"
 ---
 

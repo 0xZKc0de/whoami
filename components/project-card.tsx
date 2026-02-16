@@ -3,12 +3,17 @@ import Image from "next/image"
 import { ExternalLink, Github } from "lucide-react"
 import { ProjectMetadata } from "@/lib/projects"
 
+interface ProjectCardProps {
+    project: ProjectMetadata
+    index: number
+}
+
 export function ProjectCard({ project, index }: ProjectCardProps) {
     const isEven = index % 2 === 0
 
     return (
         <div className={`relative group flex flex-col md:flex-row gap-8 items-center ${isEven ? "" : "md:flex-row-reverse"
-            } p-6 md:p-10 rounded-3xl bg-zinc-900/30 border border-zinc-800/50 hover:border-zinc-700/50 transition-all duration-500 hover:bg-zinc-900/50`}>
+            } p-6 md:p-10 rounded-3xl bg-zinc-100/50 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700/50 transition-all duration-500 hover:bg-zinc-200/50 dark:hover:bg-zinc-900/50`}>
 
             {/* ── Image Area ───────────────────────────────────── */}
             <div className="w-full md:w-1/2 aspect-video rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 relative group-hover:scale-[1.02] transition-transform duration-500">
@@ -36,17 +41,17 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                     <span className="text-zinc-600 font-mono text-xs">{project.year}</span>
                 </div>
 
-                <h3 className="text-2xl font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors duration-300">
+                <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300">
                     {project.title}
                 </h3>
 
-                <p className="text-zinc-400 text-sm leading-relaxed">
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                     {project.description}
                 </p>
 
                 <div className="flex flex-wrap gap-2 my-2">
                     {project.techStack.map((tech: string) => (
-                        <span key={tech} className="px-2.5 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/50 text-[10px] text-zinc-400 font-mono">
+                        <span key={tech} className="px-2.5 py-1 rounded-full bg-zinc-200/50 dark:bg-zinc-800/50 border border-zinc-300/50 dark:border-zinc-700/50 text-[10px] text-zinc-600 dark:text-zinc-400 font-mono">
                             {tech}
                         </span>
                     ))}

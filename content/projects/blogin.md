@@ -5,7 +5,7 @@ year: "2024"
 techStack: ["Spring Boot", "Angular", "PostgreSQL", "JWT"]
 link: ""
 github: ""
-image: "/images/projects/blogin.jpg"
+image: "/images/blogin.png"
 category: "Personal"
 ---
 

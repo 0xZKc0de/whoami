@@ -9,10 +9,10 @@ export default function WorkPage() {
             <div className="max-w-5xl mx-auto">
                 {/* ── Header ────────────────────────────────────────── */}
                 <div className="mb-20">
-                    <h1 className="font-cormorant text-5xl md:text-6xl font-medium tracking-tight mb-6 text-zinc-100">
+                    <h1 className="font-cormorant text-5xl md:text-6xl font-medium tracking-tight mb-6 text-zinc-900 dark:text-zinc-100">
                         Selected Work
                     </h1>
-                    <p className="text-zinc-400 font-light max-w-xl text-lg leading-relaxed">
+                    <p className="text-zinc-600 dark:text-zinc-400 font-light max-w-xl text-lg leading-relaxed">
                         Explore a collection of my projects designing and building digital products — both personal and academic.
                     </p>
                 </div>
