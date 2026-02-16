@@ -6,11 +6,16 @@ export interface CommandOutput {
   className?: string
 }
 
+export interface CommandContext {
+  projects?: any[]
+  [key: string]: any
+}
+
 export interface Command {
   name: string
   description: string
   usage?: string
-  execute: (args?: string[], context?: any) => CommandOutput[]
+  execute: (args?: string[], context?: CommandContext) => CommandOutput[]
 }
 
 const commandRegistry = new Map<string, Command>()
@@ -69,63 +74,43 @@ commandRegistry.set("help", {
 // ─── Register: skills ────────────────────────────────────────────
 commandRegistry.set("skills", {
   name: "skills",
-  description: "Display technical skills with proficiency",
+  description: "Display technical skills and domains",
   execute: () => {
-    const skills = [
-      {
-        category: "Languages", items: [
-          { name: "Java", level: 9 },
-          { name: "Python", level: 8 },
-          { name: "TypeScript", level: 7 },
-          { name: "SQL", level: 8 },
-        ]
-      },
-      {
-        category: "Backend", items: [
-          { name: "Spring Boot", level: 9 },
-          { name: "FastAPI", level: 8 },
-          { name: "Node.js", level: 6 },
-          { name: "REST APIs", level: 9 },
-        ]
-      },
-      {
-        category: "DevOps", items: [
-          { name: "Docker", level: 8 },
-          { name: "CI/CD", level: 8 },
-          { name: "AWS", level: 7 },
-          { name: "Azure", level: 7 },
-        ]
-      },
-      {
-        category: "AI / ML", items: [
-          { name: "LangChain", level: 8 },
-          { name: "OpenAI", level: 8 },
-          { name: "RAG Systems", level: 8 },
-          { name: "Kafka", level: 7 },
-        ]
-      },
-    ]
-
     const lines: CommandOutput[] = [
       { text: "", className: "" },
-      { text: "  Technical Proficiency", className: "text-emerald-500/80 text-xs font-bold tracking-widest uppercase mb-3" },
+      { text: "  ~/skills", className: "text-emerald-500 font-bold mb-1" },
+      { text: "  ├── 01_Programming_&_Logic/", className: "text-zinc-700 font-bold" },
+      { text: "  │   ├── Programming/", className: "text-zinc-500" },
+      { text: "  │   │   ├── Java", className: "text-zinc-300" },
+      { text: "  │   │   ├── Python", className: "text-zinc-300" },
+      { text: "  │   │   └── SQL", className: "text-zinc-300" },
+      { text: "  │   └── Algorithmic_Thinking/", className: "text-zinc-500" },
+      { text: "  │       ├── Data_Structures", className: "text-zinc-300" },
+      { text: "  │       ├── Algorithms", className: "text-zinc-300" },
+      { text: "  │       └── Complexity_Analysis", className: "text-zinc-300" },
+      { text: "  ├── 02_Architecture_&_Design/", className: "text-zinc-700 font-bold" },
+      { text: "  │   ├── Software_Design/", className: "text-zinc-500" },
+      { text: "  │   │   ├── OOP", className: "text-zinc-300" },
+      { text: "  │   │   ├── Design_Patterns", className: "text-zinc-300" },
+      { text: "  │   │   └── Clean_Code", className: "text-zinc-300" },
+      { text: "  │   └── API_Development/", className: "text-zinc-500" },
+      { text: "  │       ├── REST", className: "text-zinc-300" },
+      { text: "  │       ├── GraphQL", className: "text-zinc-300" },
+      { text: "  │       ├── Security", className: "text-zinc-300" },
+      { text: "  │       ├── Documentation", className: "text-zinc-300" },
+      { text: "  │       └── Testing", className: "text-zinc-300" },
+      { text: "  └── 03_Data_&_Infrastructure/", className: "text-zinc-700 font-bold" },
+      { text: "      ├── Database_Management/", className: "text-zinc-500" },
+      { text: "      │   ├── Normalization", className: "text-zinc-300" },
+      { text: "      │   ├── Indexing", className: "text-zinc-300" },
+      { text: "      │   ├── Query_Optimization", className: "text-zinc-300" },
+      { text: "      │   └── Administration", className: "text-zinc-300" },
+      { text: "      └── DevOps_&_Cloud/", className: "text-zinc-500" },
+      { text: "          ├── CI/CD_Implementation", className: "text-zinc-300" },
+      { text: "          ├── Git", className: "text-zinc-300" },
+      { text: "          └── Docker", className: "text-zinc-300" },
+      { text: "", className: "" },
     ]
-
-    skills.forEach((cat) => {
-      lines.push({ text: `  ${cat.category}`, className: "text-cyan-400/80 text-xs uppercase tracking-wider mb-2" })
-
-      cat.items.forEach((skill) => {
-        const filled = "█".repeat(skill.level)
-        const empty = "░".repeat(10 - skill.level)
-        const pct = `${skill.level * 10}%`
-        lines.push({
-          text: `  ${skill.name.padEnd(14)} ${filled}${empty}  ${pct}`,
-          className: skill.level >= 8 ? "text-emerald-300/80" : skill.level >= 6 ? "text-cyan-300/60" : "text-zinc-500",
-        })
-      })
-
-      lines.push({ text: "", className: "" })
-    })
 
     return lines
   },
@@ -141,13 +126,13 @@ commandRegistry.set("projects", {
       { text: "  Featured Projects", className: "text-emerald-500/80 text-xs font-bold tracking-widest uppercase mb-3" },
     ]
 
-    const projectsList = context?.projects || projects
+    const projectsList = (context?.projects || projects) as any[]
 
-    projectsList.forEach((project: any, index: number) => {
+    projectsList.forEach((project, index) => {
       const num = String(index + 1).padStart(2, "0")
 
       lines.push({
-        text: `  ${num}. ${project.title.toUpperCase()}`,
+        text: `  ${num}. ${String(project.title).toUpperCase()}`,
         className: "text-zinc-100 font-bold tracking-wide"
       })
 
@@ -156,7 +141,7 @@ commandRegistry.set("projects", {
         className: "text-zinc-400 mb-2"
       })
 
-      if (project.techStack && project.techStack.length > 0) {
+      if (project.techStack && Array.isArray(project.techStack) && project.techStack.length > 0) {
         lines.push({
           text: `  [ ${project.techStack.join(" / ")} ]`,
           className: "text-emerald-500/60 text-xs"
@@ -204,7 +189,7 @@ commandRegistry.set("clear", {
 })
 
 // ─── Public API ──────────────────────────────────────────────────
-export function executeCommand(input: string, context?: any): { output: CommandOutput[]; isClear: boolean } {
+export function executeCommand(input: string, context?: CommandContext): { output: CommandOutput[]; isClear: boolean } {
   const trimmed = input.trim().toLowerCase()
   const [commandName, ...args] = trimmed.split(/\s+/)
 
