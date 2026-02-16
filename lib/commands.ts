@@ -10,7 +10,7 @@ export interface Command {
   name: string
   description: string
   usage?: string
-  execute: (args?: string[]) => CommandOutput[]
+  execute: (args?: string[], context?: any) => CommandOutput[]
 }
 
 const commandRegistry = new Map<string, Command>()
@@ -135,13 +135,15 @@ commandRegistry.set("skills", {
 commandRegistry.set("projects", {
   name: "projects",
   description: "List featured projects",
-  execute: () => {
+  execute: (args, context) => {
     const lines: CommandOutput[] = [
       { text: "", className: "" },
       { text: "  Featured Projects", className: "text-emerald-500/80 text-xs font-bold tracking-widest uppercase mb-3" },
     ]
 
-    projects.forEach((project, index) => {
+    const projectsList = context?.projects || projects
+
+    projectsList.forEach((project: any, index: number) => {
       const num = String(index + 1).padStart(2, "0")
 
       lines.push({
@@ -161,9 +163,9 @@ commandRegistry.set("projects", {
         })
       }
 
-      if (project.link) {
+      if (project.link || project.github) {
         lines.push({
-          text: `  ➜ ${project.link}`,
+          text: `  ➜ ${project.link || project.github}`,
           className: "text-blue-400/60 text-xs hover:text-blue-300 transition-colors cursor-pointer"
         })
       }
@@ -202,7 +204,7 @@ commandRegistry.set("clear", {
 })
 
 // ─── Public API ──────────────────────────────────────────────────
-export function executeCommand(input: string): { output: CommandOutput[]; isClear: boolean } {
+export function executeCommand(input: string, context?: any): { output: CommandOutput[]; isClear: boolean } {
   const trimmed = input.trim().toLowerCase()
   const [commandName, ...args] = trimmed.split(/\s+/)
 
@@ -228,7 +230,7 @@ export function executeCommand(input: string): { output: CommandOutput[]; isClea
     }
   }
 
-  return { output: command.execute(args), isClear: false }
+  return { output: command.execute(args, context), isClear: false }
 }
 
 export { commandRegistry }

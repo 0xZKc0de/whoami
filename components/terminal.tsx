@@ -8,7 +8,11 @@ interface HistoryEntry {
     output: CommandOutput[]
 }
 
-export function Terminal() {
+interface TerminalProps {
+    projects?: any[]
+}
+
+export function Terminal({ projects }: TerminalProps) {
     const [history, setHistory] = useState<HistoryEntry[]>([])
     const [currentInput, setCurrentInput] = useState("")
     const [commandHistoryList, setCommandHistoryList] = useState<string[]>([])
@@ -56,7 +60,7 @@ export function Terminal() {
     }, [visibleLines, currentAnimatingEntry, history])
 
     function runCommand(input: string, isInitial = false) {
-        const { output, isClear } = executeCommand(input)
+        const { output, isClear } = executeCommand(input, { projects })
 
         if (isClear) {
             setHistory([])

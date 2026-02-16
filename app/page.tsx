@@ -1,7 +1,10 @@
 import { Terminal } from "@/components/terminal"
 import { Footer } from "@/components/footer"
+import { getProjects } from "@/lib/projects"
 
 export default function Home() {
+  const projects = getProjects()
+
   return (
     <>
       <main className="min-h-screen px-8 py-16 relative z-10">
@@ -18,7 +21,7 @@ export default function Home() {
 
           {/* Terminal Section */}
           <section id="about" className="mb-24 scroll-mt-24">
-            <Terminal />
+            <Terminal projects={projects} />
           </section>
         </div>
       </main>
