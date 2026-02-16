@@ -38,8 +38,9 @@ export const profile = {
         "1st Place — Secure Challenge 2025",
     ],
     social: [
-        { platform: "GitHub", url: "github.com/0xZKc0de", description: "Open source contributions and personal projects" },
-        { platform: "LinkedIn", url: "linkedin.com/in/mohamed-el-haddad", description: "Professional network and career updates" },
-        { platform: "LeetCode", url: "leetcode.com/0xZKc0de", description: "Competitive programming and problem solving" },
+        { platform: "GitHub", url: "https://github.com/0xZKc0de", description: "Open source contributions and personal projects" },
+        { platform: "LinkedIn", url: "https://linkedin.com/in/0xZKc0de", description: "Professional network and career updates" },
+        { platform: "LeetCode", url: "https://leetcode.com/u/UPkLskHSOz", description: "Competitive programming and problem solving" },
+        { platform: "Codeforces", url: "https://codeforces.com/profile/0xHADDAD", description: "Competitive programming contests" },
     ],
 }
