@@ -152,3 +152,22 @@ body {
 .latex-style h3::before {
   content: counter(h2counter) "." counter(h3counter) " ";
 }
+
+/* ── Skills Marquee Animations ───────────────────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333333%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-33.333333%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 35s linear infinite;
+}

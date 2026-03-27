@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, KeyboardEvent } from "react"
 import { executeCommand, commandRegistry, type CommandOutput } from "@/lib/commands"
+import { SkillsMarquee } from "@/components/skills-marquee"
 
 interface HistoryEntry {
     command: string
@@ -21,6 +22,7 @@ export function Terminal({ projects }: TerminalProps) {
     const [visibleLines, setVisibleLines] = useState(0)
     const [currentAnimatingEntry, setCurrentAnimatingEntry] = useState<number>(-1)
     const [isFocused, setIsFocused] = useState(true)
+    const [showSkills, setShowSkills] = useState(false)
 
     const inputRef = useRef<HTMLInputElement>(null)
     const scrollRef = useRef<HTMLDivElement>(null)
@@ -60,6 +62,12 @@ export function Terminal({ projects }: TerminalProps) {
     }, [visibleLines, currentAnimatingEntry, history])
 
     function runCommand(input: string, isInitial = false) {
+        if (input.trim().toLowerCase() === "skills") {
+            setShowSkills(true)
+        } else if (input.trim().toLowerCase() === "clear") {
+            setShowSkills(false)
+        }
+        
         const { output, isClear } = executeCommand(input, { projects })
 
         if (isClear) {
@@ -134,15 +142,17 @@ export function Terminal({ projects }: TerminalProps) {
     const commandCount = commandRegistry.size
 
     return (
-        <div
-            className={`w-full max-w-4xl mx-auto rounded-xl overflow-hidden transition-all duration-500 
-                ${isFocused
-                    ? "shadow-[0_0_60px_-15px_rgba(16,185,129,0.15)] border border-zinc-700/50"
-                    : "shadow-2xl shadow-black/50 border border-zinc-800/50"
-                }`}
-            onClick={focusInput}
-        >
-            {/* ── Title Bar ────────────────────────────────────── */}
+        <>
+            <SkillsMarquee isVisible={showSkills} />
+            <div
+                className={`w-full max-w-4xl mx-auto rounded-xl overflow-hidden transition-all duration-500 relative z-10
+                    ${isFocused
+                        ? "shadow-[0_0_60px_-15px_rgba(16,185,129,0.15)] border border-zinc-700/50"
+                        : "shadow-2xl shadow-black/50 border border-zinc-800/50"
+                    }`}
+                onClick={focusInput}
+            >
+                {/* ── Title Bar ────────────────────────────────────── */}
             <div className="flex items-center justify-between px-4 py-2.5 bg-zinc-900/90 backdrop-blur-xl border-b border-zinc-800/50">
                 <div className="flex items-center gap-3">
                     {/* Traffic lights */}
@@ -298,5 +308,6 @@ export function Terminal({ projects }: TerminalProps) {
                 </div>
             </div>
         </div>
+        </>
     )
 }

@@ -68,48 +68,17 @@ commandRegistry.set("help", {
   },
 })
 
-// ─── Register: skills ────────────────────────────────────────────
+// ─── Register: skills (Visual Feature) ───────────────────────────
 commandRegistry.set("skills", {
   name: "skills",
-  description: "Display technical skills and domains",
+  description: "Display visual technical skills sequence",
   execute: () => {
-    const lines: CommandOutput[] = [
+    return [
       { text: "", className: "" },
-      { text: "  ~/skills", className: "text-emerald-500 font-bold mb-1" },
-      { text: "  ├── 01_Programming_&_Logic/", className: "text-zinc-700 font-bold" },
-      { text: "  │   ├── Programming/", className: "text-zinc-500" },
-      { text: "  │   │   ├── Java", className: "text-zinc-300" },
-      { text: "  │   │   ├── Python", className: "text-zinc-300" },
-      { text: "  │   │   └── SQL", className: "text-zinc-300" },
-      { text: "  │   └── Algorithmic_Thinking/", className: "text-zinc-500" },
-      { text: "  │       ├── Data_Structures", className: "text-zinc-300" },
-      { text: "  │       ├── Algorithms", className: "text-zinc-300" },
-      { text: "  │       └── Complexity_Analysis", className: "text-zinc-300" },
-      { text: "  ├── 02_Architecture_&_Design/", className: "text-zinc-700 font-bold" },
-      { text: "  │   ├── Software_Design/", className: "text-zinc-500" },
-      { text: "  │   │   ├── OOP", className: "text-zinc-300" },
-      { text: "  │   │   ├── Design_Patterns", className: "text-zinc-300" },
-      { text: "  │   │   └── Clean_Code", className: "text-zinc-300" },
-      { text: "  │   └── API_Development/", className: "text-zinc-500" },
-      { text: "  │       ├── REST", className: "text-zinc-300" },
-      { text: "  │       ├── GraphQL", className: "text-zinc-300" },
-      { text: "  │       ├── Security", className: "text-zinc-300" },
-      { text: "  │       ├── Documentation", className: "text-zinc-300" },
-      { text: "  │       └── Testing", className: "text-zinc-300" },
-      { text: "  └── 03_Data_&_Infrastructure/", className: "text-zinc-700 font-bold" },
-      { text: "      ├── Database_Management/", className: "text-zinc-500" },
-      { text: "      │   ├── Normalization", className: "text-zinc-300" },
-      { text: "      │   ├── Indexing", className: "text-zinc-300" },
-      { text: "      │   ├── Query_Optimization", className: "text-zinc-300" },
-      { text: "      │   └── Administration", className: "text-zinc-300" },
-      { text: "      └── DevOps_&_Cloud/", className: "text-zinc-500" },
-      { text: "          ├── CI/CD_Implementation", className: "text-zinc-300" },
-      { text: "          ├── Git", className: "text-zinc-300" },
-      { text: "          └── Docker", className: "text-zinc-300" },
+      { text: "  >> Launching visual skills sequence...", className: "text-emerald-500/80 font-bold mb-3 font-mono" },
+      { text: "  [SYSTEM] Background visualizer activated. Type 'clear' to dismiss.", className: "text-zinc-500 font-mono italic text-xs mb-2" },
       { text: "", className: "" },
     ]
-
-    return lines
   },
 })
 
