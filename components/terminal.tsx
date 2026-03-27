@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useRef, useEffect, KeyboardEvent } from "react"
+import { useState, useRef, useEffect, KeyboardEvent, useCallback } from "react"
 import { executeCommand, commandRegistry, type CommandOutput } from "@/lib/commands"
 import { SkillsMarquee } from "@/components/skills-marquee"
+import { KernelPanic } from "@/components/kernel-panic"
 
 interface HistoryEntry {
     command: string
@@ -24,6 +25,7 @@ export function Terminal({ projects }: TerminalProps) {
     const [isFocused, setIsFocused] = useState(true)
     const [showSkills, setShowSkills] = useState(false)
     const [isProcessing, setIsProcessing] = useState(false)
+    const [showKernelPanic, setShowKernelPanic] = useState(false)
 
     const inputRef = useRef<HTMLInputElement>(null)
     const scrollRef = useRef<HTMLDivElement>(null)
@@ -88,6 +90,12 @@ export function Terminal({ projects }: TerminalProps) {
             setHistory((prev) => [...prev, newEntry])
             setCurrentInput("")
 
+            // Check for kernel panic trigger
+            if (output.some(line => line.text === "__KERNEL_PANIC__")) {
+                setShowKernelPanic(true)
+                return
+            }
+
             if (!isInitial) {
                 setCommandHistoryList((prev) => [input, ...prev])
             }
@@ -147,11 +155,17 @@ export function Terminal({ projects }: TerminalProps) {
         )
         : undefined
 
+    const handleKernelRecovery = useCallback(() => {
+        setShowKernelPanic(false)
+        setHistory([])
+    }, [])
+
     const commandCount = commandRegistry.size
 
     return (
         <>
             <SkillsMarquee isVisible={showSkills} />
+            <KernelPanic isActive={showKernelPanic} onRecoveryComplete={handleKernelRecovery} />
             <div
                 className={`w-full max-w-4xl mx-auto rounded-xl overflow-hidden transition-all duration-500 relative z-10
                     ${isFocused

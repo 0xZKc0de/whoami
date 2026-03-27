@@ -171,3 +171,24 @@ body {
 .animate-marquee-reverse {
   animation: marquee-reverse 35s linear infinite;
 }
+
+/* ── Kernel Panic Glitch Effect ─────────────────────────── */
+@keyframes kernel-glitch {
+  0% { background: #000; }
+  5% { background: #ff0000; }
+  10% { background: #000; }
+  15% { background: #ff0000; transform: translate(-2px, 1px); }
+  20% { background: #000; transform: translate(0); }
+  30% { background: #220000; }
+  40% { background: #000; transform: translate(3px, -1px); }
+  50% { background: #ff0000; transform: translate(0); }
+  60% { background: #000; }
+  70% { background: #220000; transform: translate(-1px, 2px); }
+  80% { background: #000; transform: translate(0); }
+  90% { background: #ff0000; }
+  100% { background: #000; }
+}
+
+.kernel-glitch {
+  animation: kernel-glitch 0.8s ease-in-out;
+}

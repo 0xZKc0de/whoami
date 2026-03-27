@@ -15,6 +15,7 @@ export interface Command {
   name: string
   description: string
   usage?: string
+  hidden?: boolean
   execute: (args?: string[], context?: CommandContext) => CommandOutput[] | Promise<CommandOutput[]>
 }
 
@@ -55,6 +56,7 @@ commandRegistry.set("help", {
     ]
 
     commandRegistry.forEach((cmd) => {
+      if (cmd.hidden) return
       lines.push({
         text: `  ${cmd.name.padEnd(12)}  ${cmd.description}`,
         className: "text-zinc-300",
@@ -82,10 +84,11 @@ commandRegistry.set("skills", {
   },
 })
 
-// ─── Register: server (API Integration) ──────────────────────────
+// ─── Register: server (API Integration) [HIDDEN] ────────────────
 commandRegistry.set("server", {
   name: "server",
   description: "Get real-time Vercel server specifications and status",
+  hidden: true,
   execute: async () => {
     try {
       const controller = new AbortController()
@@ -183,6 +186,52 @@ commandRegistry.set("clear", {
   name: "clear",
   description: "Clear terminal",
   execute: () => [],
+})
+
+// ─── Register: sudo (HIDDEN Easter Egg) ─────────────────────────
+commandRegistry.set("sudo", {
+  name: "sudo",
+  description: "",
+  hidden: true,
+  execute: (args) => {
+    const fullArgs = (args || []).join(" ")
+    if (fullArgs.includes("rm") && fullArgs.includes("-rf") && fullArgs.includes("/")) {
+      // Return special marker that terminal.tsx will detect
+      return [
+        { text: "__KERNEL_PANIC__", className: "hidden" },
+      ]
+    }
+    return [
+      { text: "", className: "" },
+      { text: "  [sudo] permission denied for user 'guest'", className: "text-red-400/80 font-mono" },
+      { text: "  This incident will be reported.", className: "text-zinc-500 text-xs font-mono italic" },
+      { text: "", className: "" },
+    ]
+  },
+})
+
+// ─── Register: rm (HIDDEN Easter Egg) ───────────────────────────
+commandRegistry.set("rm", {
+  name: "rm",
+  description: "",
+  hidden: true,
+  execute: (args) => {
+    const fullArgs = (args || []).join(" ")
+    if (fullArgs.includes("-rf") && fullArgs.includes("/")) {
+      return [
+        { text: "", className: "" },
+        { text: "  rm: cannot remove '/': Operation not permitted", className: "text-red-400/80 font-mono" },
+        { text: "  Are you trying to mass-destruct without privileges? 🤨", className: "text-amber-400/80 text-xs font-mono" },
+        { text: "  Hint: Real hackers use sudo.", className: "text-zinc-600 text-xs font-mono italic" },
+        { text: "", className: "" },
+      ]
+    }
+    return [
+      { text: "", className: "" },
+      { text: `  rm: missing operand`, className: "text-red-400/80 font-mono" },
+      { text: "", className: "" },
+    ]
+  },
 })
 
 // ─── Public API ──────────────────────────────────────────────────
