@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navigation } from "@/components/navigation"
 import { GrainOverlay } from "@/components/grain-overlay"
+import { VisitorTracker } from "@/components/visitor-tracker"
 
 const habibi = Habibi({
     weight: "400",
@@ -49,6 +50,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <GrainOverlay />
+                    <VisitorTracker />
                     <Navigation />
                     {children}
                 </ThemeProvider>
