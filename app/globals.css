@@ -130,3 +130,25 @@ body {
 .terminal-line-enter {
   animation: fadeInUp 0.15s ease-out forwards;
 }
+
+/* ── LaTeX Style Blog Overrides ─────────────────────────── */
+.latex-style {
+  counter-reset: h2counter;
+}
+
+.latex-style h2 {
+  counter-increment: h2counter;
+  counter-reset: h3counter;
+}
+
+.latex-style h2::before {
+  content: counter(h2counter) ". ";
+}
+
+.latex-style h3 {
+  counter-increment: h3counter;
+}
+
+.latex-style h3::before {
+  content: counter(h2counter) "." counter(h3counter) " ";
+}
