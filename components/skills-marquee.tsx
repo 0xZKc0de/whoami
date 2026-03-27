@@ -37,12 +37,11 @@ const devopsLogos = [
 const aiLogos = [
   { name: "Python", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
   { name: "FastAPI", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
+  { name: "Neo4j", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/neo4j/neo4j-original.svg" },
   { name: "MCP", url: "https://cdn.simpleicons.org/anthropic" },
-  { name: "Langchain", url: "https://cdn.simpleicons.org/langchain" },
-  { name: "Langgraph", url: "https://cdn.simpleicons.org/langgraph" },
-  { name: "LangSmith", url: "https://cdn.simpleicons.org/langchain" },
+  { name: "LangChain", url: "https://cdn.simpleicons.org/langchain" },
+  { name: "LangGraph", url: "https://cdn.simpleicons.org/langgraph" },
   { name: "PyTorch", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" },
-  { name: "ChromaDB", url: "https://dbdb.io/media/logos/chroma_H600YUl.svg" },
   { name: "Redis", url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" },
 ]
 
