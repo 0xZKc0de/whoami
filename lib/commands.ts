@@ -15,7 +15,7 @@ export interface Command {
   name: string
   description: string
   usage?: string
-  execute: (args?: string[], context?: CommandContext) => CommandOutput[]
+  execute: (args?: string[], context?: CommandContext) => CommandOutput[] | Promise<CommandOutput[]>
 }
 
 const commandRegistry = new Map<string, Command>()
@@ -79,6 +79,37 @@ commandRegistry.set("skills", {
       { text: "  [SYSTEM] Background visualizer activated. Type 'clear' to dismiss.", className: "text-zinc-500 font-mono italic text-xs mb-2" },
       { text: "", className: "" },
     ]
+  },
+})
+
+// ─── Register: server (API Integration) ──────────────────────────
+commandRegistry.set("server", {
+  name: "server",
+  description: "Get real-time Vercel server specifications and status",
+  execute: async () => {
+    try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 8000)
+
+      const response = await fetch('/api/terminal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ command: 'server' }),
+        signal: controller.signal
+      })
+      clearTimeout(timeoutId)
+
+      if (!response.ok) throw new Error('Network response was not ok')
+      const data = await response.json()
+      return data.output || []
+    } catch (error) {
+      return [
+        { text: "", className: "" },
+        { text: "  [ERROR] Connection to Vercel backbone failed.", className: "text-red-500 font-bold mb-1 font-mono" },
+        { text: "  > The serverless function timed out or is unreachable.", className: "text-zinc-500 text-xs font-mono" },
+        { text: "", className: "" }
+      ]
+    }
   },
 })
 
@@ -155,7 +186,7 @@ commandRegistry.set("clear", {
 })
 
 // ─── Public API ──────────────────────────────────────────────────
-export function executeCommand(input: string, context?: CommandContext): { output: CommandOutput[]; isClear: boolean } {
+export async function executeCommand(input: string, context?: CommandContext): Promise<{ output: CommandOutput[]; isClear: boolean }> {
   const trimmed = input.trim().toLowerCase()
   const [commandName, ...args] = trimmed.split(/\s+/)
 
@@ -181,7 +212,8 @@ export function executeCommand(input: string, context?: CommandContext): { outpu
     }
   }
 
-  return { output: command.execute(args, context), isClear: false }
+  const output = await command.execute(args, context)
+  return { output, isClear: false }
 }
 
 export { commandRegistry }
