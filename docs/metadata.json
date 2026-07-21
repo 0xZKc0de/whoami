@@ -1,0 +1,24 @@
+{
+    "generation_info": {
+        "timestamp": "2026-07-21T10:04:39.116273",
+        "main_model": "gpt-5",
+        "generator_version": "1.0.1",
+        "repo_path": "/home/ubuntu/whoami",
+        "commit_id": "759eebbab7afa10a2482323e1ee6a1036f4e696d"
+    },
+    "statistics": {
+        "total_components": 24,
+        "leaf_nodes": 23,
+        "max_depth": 2
+    },
+    "files_generated": [
+        "overview.md",
+        "module_tree.json",
+        "first_module_tree.json",
+        "whoami_commands_engine.md",
+        "whoami_visitor_notify.md",
+        "whoami_serverless_api.md",
+        "whoami_terminal_ui.md",
+        "whoami_home_integration.md"
+    ]
+}

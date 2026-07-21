@@ -1,0 +1,41 @@
+{
+    "whoami_terminal_ui": {
+        "components": [
+            "components/terminal.tsx::Terminal",
+            "components/skills-marquee.tsx::SkillsMarquee",
+            "components/grain-overlay.tsx::GrainOverlay"
+        ],
+        "children": {}
+    },
+    "whoami_commands_engine": {
+        "components": [
+            "lib/commands.ts::CommandOutput",
+            "lib/commands.ts::CommandContext",
+            "lib/commands.ts::executeCommand",
+            "lib/commands.ts::Command"
+        ],
+        "children": {}
+    },
+    "whoami_serverless_api": {
+        "components": [
+            "app/api/terminal/route.ts::POST"
+        ],
+        "children": {}
+    },
+    "whoami_home_integration": {
+        "components": [
+            "app/page.tsx::Home",
+            "lib/projects.ts::ProjectMetadata",
+            "lib/projects.ts::getProjects",
+            "lib/data/projects.ts::Project"
+        ],
+        "children": {}
+    },
+    "whoami_visitor_notify": {
+        "components": [
+            "components/visitor-tracker.tsx::VisitorTracker",
+            "app/api/notify/route.ts::POST"
+        ],
+        "children": {}
+    }
+}
